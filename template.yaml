@@ -6,8 +6,9 @@ metadata:
   description: Bootstraps a new Parsol Agent using a specified AI Model
   tags:
     - python
-    - llama.cpp
-    - nodejs
+    - 'llama.cpp'
+    - agent
+    - ai
 spec:
   owner: platform-engineering
   type: template
@@ -46,7 +47,7 @@ spec:
         model:
           title: Model
           description: The Model used by the Agent
-          default: llama.cpp
+          default: parasol/parasol-chat
           type: string
           enum:
             - parasol/parasol-chat
