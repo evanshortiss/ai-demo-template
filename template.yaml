@@ -6,7 +6,7 @@ metadata:
   description: Bootstraps a new Parsol Agent using a specified AI Model
   tags:
     - python
-    - 'llama.cpp'
+    - llamacpp
     - agent
     - ai
 spec:
