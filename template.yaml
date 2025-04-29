@@ -57,7 +57,34 @@ spec:
             - ibm-granite/granite-8b-code-instruct-128k
             - google/gemma-3-27b-it
             - meta-llama/Llama-4-Scout-17B-16E-Instruct
-
+    
+    - title: Repository Information
+      required:
+        - hostType
+        - repoOwner
+        - repoName
+        - branch
+      properties:
+        hostType:
+          title: Host Type
+          type: string
+          enum:
+            - GitHub
+            - GitLab
+          default: GitHub
+        repoOwner:
+          title: Repository Owner
+          default: summit-demo
+          type: string
+          ui:help: The organization, user or project that this repo will belong to
+        repoName:
+          title: Repository Name
+          type: string
+          default: parasol-agent
+        branch:
+          title: Repository Default Branch
+          type: string
+          default: main
   steps:
     - id: template
       name: Generate Application
