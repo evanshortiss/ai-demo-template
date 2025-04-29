@@ -125,9 +125,9 @@ spec:
   output:
     links:
       - title: Quarkus Application Repository
-        url: ${{ steps.publish.output.remoteUrl }}
+        url: https://foo.bar
       - title: Manifests Repository
-        url: ${{ steps.publishGitops.output.remoteUrl }}
+        url: https://foo.bar
       - title: Open Component in Catalog
         icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
+        url: https://foo.bar
