@@ -1,0 +1,105 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: parasol-agent
+  title: Parasol AI IntelliSales
+  description: Bootstraps a new Parsol Agent using a specified AI Model
+  tags:
+    - python
+    - llama.cpp
+    - nodejs
+spec:
+  owner: platform-engineering
+  type: template
+
+  parameters:
+    - title: Basic Configuration
+      required:
+        - name
+        - description
+        - owner
+        - model
+      properties:
+        name:
+          title: Name
+          type: string
+          default: parasol-agent
+          description: Unique name for the Component
+          maxLength: 50
+          pattern: '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$'
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          default: An Agentic application that uses a Model hosted by Red Hat OpenShift AI
+          description: Description for the Component in the Software Catalog
+          maxLength: 100
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the resulting Component
+          ui:field: OwnerPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              kind: User
+        model:
+          title: Model
+          description: The Model used by the Agent
+          default: llama.cpp
+          type: string
+          enum:
+            - parasol/parasol-chat
+            - parasol/parasol-agent
+            - parasol/parasol-corp
+            - ibm-granite/granite-3.3-8b-instruct
+            - ibm-granite/granite-8b-code-instruct-128k
+            - google/gemma-3-27b-it
+            - meta-llama/Llama-4-Scout-17B-16E-Instruct
+
+  steps:
+    - id: template
+      name: Generate Application
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+    - id: publish
+      name: Push Code to Git
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+    - id: register
+      name: Register Component in Catalog
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+    - id: template-gitops-deployment
+      name: Generate Deployment Manifests
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+    - id: publishGitops
+      name: Push Manifests to Git
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+    - id: create-argocd-resources
+      name: Create Argo CD Bootstrap Application
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values: {}
+  output:
+    links:
+      - title: Quarkus Application Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Manifests Repository
+        url: ${{ steps.publishGitops.output.remoteUrl }}
+      - title: Open Component in Catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
