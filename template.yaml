@@ -38,6 +38,7 @@ spec:
         owner:
           title: Owner
           type: string
+          default: user:default/evanshortiss
           description: Owner of the resulting Component
           ui:field: OwnerPicker
           ui:options:
@@ -50,8 +51,10 @@ spec:
           default: parasol/parasol-chat
           type: string
           enum:
-            - parasol/parasol-chat
-            - parasol/parasol-agent
+            - parasol/parasol-chat-405b
+            - parasol/parasol-chat-7b
+            - parasol/parasol-agent-405b
+            - parasol/parasol-agent-7b
             - parasol/parasol-corp
             - ibm-granite/granite-3.3-8b-instruct
             - ibm-granite/granite-8b-code-instruct-128k
